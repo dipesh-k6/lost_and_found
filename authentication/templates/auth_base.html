@@ -1,19 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Account{% endblock %} | Lost &amp; Found</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            background: radial-gradient(circle at top, #2b2f36 0%, #14161a 70%);
+        }
+        .auth-card {
+            max-width: 440px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="d-flex vh-100 justify-content-center align-items-center">
-    {% block content %}
+    <main class="container min-vh-100 d-flex flex-column justify-content-center align-items-center py-5">
 
-    {% endblock %}
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>    
+        <!-- Brand -->
+        <a href="{% url 'dashboard_page' %}"
+           class="text-decoration-none text-light fs-3 fw-bold mb-4 d-flex align-items-center">
+            <i class="bi bi-search-heart me-2 text-warning"></i>
+            Lost <span class="text-warning mx-1">&amp;</span> Found
+        </a>
+
+        <!-- Card -->
+        <div class="card auth-card shadow-lg w-100">
+            <div class="card-body p-4 p-md-5">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags|default:'info' }}{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+
+        <!-- Optional footer text under the card -->
+        <p class="text-secondary small mt-4 mb-0 text-center">
+            {% block auth_footer %}{% endblock %}
+        </p>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

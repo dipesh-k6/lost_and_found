@@ -1,12 +1,19 @@
-{% extends 'auth_base.html'  %}
+{% extends 'auth_base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} Login {% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success mt-2" >Login</button>
-</form>
+    <h2 class="h4 fw-bold mb-1">Welcome back</h2>
+    <p class="text-secondary mb-4">Log in to report or claim items.</p>
+
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-warning fw-semibold w-100 mt-3">Login</button>
+    </form>
+{% endblock %}
+
+{% block auth_footer %}
+    Don't have an account? <a href="{% url 'signup_page' %}" class="link-warning">Sign up</a>
 {% endblock %}
