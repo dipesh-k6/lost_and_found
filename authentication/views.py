@@ -18,7 +18,7 @@ def signup_user(request):
     else:
         form = UserCreationForm()
 
-    return render(request, 'authentication/register.html', {"form":form})
+    return render(request, 'authentication/signup.html', {"form":form})
 
 def login_user(request):
     """_summary_
