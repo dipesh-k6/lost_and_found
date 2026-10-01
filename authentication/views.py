@@ -31,12 +31,6 @@ def login_user(request):
             user login form
     _extended_summary_
             handles user login and start session
-
-    Args:
-        request (_type_): _GET, POST_
-
-    Returns:
-        _type_: _template_
     """    
 
     if request.method == 'POST':
@@ -66,8 +60,6 @@ def logout_user(request):
 
     _extended_summary_
         logs user out and redirect to dashboard page
-    Args:
-        request (_type_): _GET_
     """    
     if request.method == "POST":
         logout(request)
