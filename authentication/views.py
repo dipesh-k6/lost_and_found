@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm #can also use Authenticat
 from django.contrib.auth import login, logout, authenticate
 from .forms import LoginForm
 
-def register_user(request):
+def signup_user(request):
     """_summary_
             user registration form
     _extended_summary_
