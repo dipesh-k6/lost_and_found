@@ -8,12 +8,6 @@ def register_user(request):
             user registration form
     _extended_summary_
             handles user registration/data_validation and redirect to login page
-    
-    Args:
-        request (_type_): _GET, POST_
-    
-    Returns:
-        _type_: _template_
     """    
 
     if request.method == 'POST':
