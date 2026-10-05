@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'core',
     'authentication',
+    'items',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#user model
+# AUTH_USER_MODEL = 
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
@@ -130,6 +133,12 @@ MAILERS = {
     },
 }
 
+# adding bootstrap
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# handling dynamic media
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
