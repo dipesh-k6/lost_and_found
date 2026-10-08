@@ -13,3 +13,5 @@ class ItemAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["name"]
     list_per_page = 15
+
+admin.site.register(models.ItemImage)

@@ -135,10 +135,11 @@ MAILERS = {
 
 # adding bootstrap
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # handling dynamic media
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# handling login redirection
+LOGIN_URL = "login_page"

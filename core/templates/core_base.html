@@ -79,8 +79,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-lg-3" href="/">
-             Submit Item 
+          <a class="nav-link px-lg-3" href="{% url 'submit_found_page' %}">
+             Submit Found Item
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-lg-3" href="{% url 'report_lost_page' %}">
+             Report Lost Item
           </a>
         </li>
       </ul>
@@ -103,8 +108,8 @@
       <div class="d-flex align-items-lg-center flex-column flex-lg-row gap-2">
         {% if user.is_authenticated %}
           <span class="navbar-text text-light d-none d-lg-inline me-2">
-            <i class="bi bi-person-circle me-1"></i>{{ user.get_username }}
-          </span>
+            <a href="{% url 'user_page' user.get_username user.id %}"> <i class="bi bi-person-circle me-1"></i>{{ user.get_username }}
+          </span> </a>
 
           <form action="{% url 'logout_page' %}" method="POST" class="m-0">
             {% csrf_token %}

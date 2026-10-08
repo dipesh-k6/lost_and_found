@@ -3,5 +3,32 @@
 {% block title %} dashboard {% endblock %}
 
 {% block content %} 
-<h4>This is dashboard page </h4>
+
+<!-- submit item form  -->
+{% if submit_found_form %}
+    {% include "items/submitfounditem.html" %}
+
+<!-- report item form  -->
+{% elif report_lost_form %}
+    {% include "items/reportlostitem.html" %}
+
+<!-- user section -->
+{% elif user_verified %}
+    <h2>User Page | {{user.get_username}}</h2>
+    {% for item in user_items  %}
+        <ol>
+            <h3>{{item.title}}</h3>
+            <li>{{item.description}}</li>
+            <li>{{item.category}}</li>
+            <li>{{item.status}}</li>
+            <li>{{item.date}}</li>
+            <img src="{{ item.images.image.url }}" alt="{{item.title}}">
+        </ol>
+    {% endfor %}
+
+{% else %}
+    <h4>This is dashboard page </h4>
+
+{% endif %}
+
 {% endblock %}
