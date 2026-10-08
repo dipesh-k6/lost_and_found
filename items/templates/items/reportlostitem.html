@@ -1,6 +1,7 @@
 {% load crispy_forms_tags %}
-<form method="POST" novalidate>
+<form method="POST" action="{% url 'report_lost_page' %}" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {{ report_lost_form|crispy }}
+    {{ image_form|crispy }}
     <button type="submit" class="btn btn-success fw-semibold w-100 mt-3">Report Item</button>
 </form>

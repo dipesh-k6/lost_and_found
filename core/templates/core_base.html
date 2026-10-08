@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body>
+<body class="min-vh-100 d-flex flex-column">
     <!-- navbar -->
      <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
 
@@ -108,8 +108,8 @@
       <div class="d-flex align-items-lg-center flex-column flex-lg-row gap-2">
         {% if user.is_authenticated %}
           <span class="navbar-text text-light d-none d-lg-inline me-2">
-            <a href="{% url 'user_page' user.get_username user.id %}"> <i class="bi bi-person-circle me-1"></i>{{ user.get_username }}
-          </span> </a>
+            <a href="{% url 'user_page' user.get_username user.id %} " class="nav-link"> <i class="bi bi-person-circle me-1"></i>{{ user.get_username }} </a>
+          </span> 
 
           <form action="{% url 'logout_page' %}" method="POST" class="m-0">
             {% csrf_token %}
@@ -137,7 +137,7 @@
 
     
 <!-- content -->
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4 flex-grow-1">
         {% block content %}
 
         {% endblock %}

@@ -1,10 +1,13 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from items.models import Item,ItemImage
+from items.models import Item
 
 def dashboard(request):
-    return render(request, 'core/dashboard.html')
+    found_items = Item.objects.filter(type="found", status="active").prefetch_related("images").order_by("-date")
+    lost_items = Item.objects.filter(type="lost", status="active").prefetch_related("images").order_by("-date")
+
+    return render(request, 'core/dashboard.html', {"found_items":found_items, "lost_items":lost_items})
 
 @login_required
 def user_page(request, username, userid):

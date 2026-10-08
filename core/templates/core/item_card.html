@@ -1,0 +1,31 @@
+<div class="card h-100 shadow-sm">
+  {% with img=item.images.all.0 %}
+    {% if img and img.image %}
+      <img src="{{ img.image.url }}" class="card-img-top object-fit-cover"
+           style="height: 200px;" alt="{{ item.title }}">
+    {% else %}
+      <div class="bg-light d-flex align-items-center justify-content-center text-muted"
+           style="height: 200px;">
+        <i class="bi bi-image fs-1"></i>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="card-body">
+    <div class="mb-2">
+      {% if item.type == "found" %}
+        <span class="badge text-bg-success">Found</span>
+      {% else %}
+        <span class="badge text-bg-danger">Lost</span>
+      {% endif %}
+      <span class="badge text-bg-secondary">{{ item.category }}</span>
+    </div>
+    <h5 class="card-title">{{ item.title }}</h5>
+    <p class="card-text text-muted small">{{ item.description|truncatechars:30 }}</p>
+  </div>
+
+  <div class="card-footer bg-transparent small text-muted d-flex justify-content-between">
+    <span><i class="bi bi-geo-alt me-1"></i>{{ item.city }}, {{ item.district }}</span>
+    <span><i class="bi bi-calendar3 me-1"></i>{{ item.date|date:"M d, Y" }}</span>
+  </div>
+</div>

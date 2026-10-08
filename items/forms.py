@@ -17,10 +17,7 @@ class CategoryForm(forms.ModelForm):
         fields = "__all__"
 
 class ItemImageForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
     class Meta:
         model = ItemImage
         fields = ["image"]
-
-    widgets = {
-        "image": forms.ClearableFileInput(attrs= {"multiple":True})
-    }

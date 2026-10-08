@@ -14,21 +14,48 @@
 
 <!-- user section -->
 {% elif user_verified %}
-    <h2>User Page | {{user.get_username}}</h2>
-    {% for item in user_items  %}
-        <ol>
-            <h3>{{item.title}}</h3>
-            <li>{{item.description}}</li>
-            <li>{{item.category}}</li>
-            <li>{{item.status}}</li>
-            <li>{{item.date}}</li>
-            <img src="{{ item.images.image.url }}" alt="{{item.title}}">
-        </ol>
-    {% endfor %}
+    {% include "core/userpage.html" %}
 
+<!-- items display -->
 {% else %}
-    <h4>This is dashboard page </h4>
+    <div class="container">
 
+  <!-- found items -->
+  <section class="mb-5">
+    <div class="d-flex align-items-center mb-3">
+      <h2 class="h4 mb-0"><i class="bi bi-check-circle text-success me-2"></i>Found Items</h2>
+      <span class="badge text-bg-success ms-2">{{ found_items|length }}</span>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+      {% for item in found_items %}
+        <div class="col">{% include "core/item_card.html" %}</div>
+      {% empty %}
+        <div class="col-12">
+          <div class="alert alert-light border mb-0">No found items submitted yet.</div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- lost items -->
+  <section class="mb-5">
+    <div class="d-flex align-items-center mb-3">
+      <h2 class="h4 mb-0"><i class="bi bi-exclamation-circle text-danger me-2"></i>Lost Items</h2>
+      <span class="badge text-bg-danger ms-2">{{ lost_items|length }}</span>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+      {% for item in lost_items %}
+        <div class="col">{% include "core/item_card.html" %}</div>
+      {% empty %}
+        <div class="col-12">
+          <div class="alert alert-light border mb-0">No lost items reported yet.</div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+</div>
+  
 {% endif %}
 
 {% endblock %}

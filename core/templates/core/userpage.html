@@ -1,4 +1,66 @@
-<h3>User Page</h3>
+<div class="container">
+    <section class="mb-5">
+        <div class="d-flex align-items-center mb-3">
+            <h2 class="h4 mb-0">Your Items</h2>
+            <span class="badge text-bg-secondary ms-2">{{ user_items|length }}</span>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            {% for item in user_items %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        {% with img=item.images.all.0 %}
+                            {% if img and img.image %}
+                                <img src="{{ img.image.url }}" class="card-img-top object-fit-cover"
+                                     style="height: 200px;" alt="{{ item.title }}">
+                            {% else %}
+                                <div class="bg-light d-flex align-items-center justify-content-center text-muted"
+                                     style="height: 200px;">
+                                    <i class="bi bi-image fs-1"></i>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
 
-<p>Howdy, {{ user.get_username }}</p>
-{% for  %}
+                        <div class="card-body">
+                            <div class="mb-2">
+                                {% if item.type == "found" %}
+                                    <span class="badge text-bg-success">Found</span>
+                                {% else %}
+                                    <span class="badge text-bg-danger">Lost</span>
+                                {% endif %}
+                                <span class="badge text-bg-secondary">{{ item.category }}</span>
+                                {% if item.status == "active" %}
+                                    <span class="badge text-bg-primary">{{ item.status|title }}</span>
+                                {% elif item.status == "resolved" %}
+                                    <span class="badge text-bg-success">{{ item.status|title }}</span>
+                                {% else %}
+                                    <span class="badge text-bg-secondary">{{ item.status|title }}</span>
+                                {% endif %}
+                            </div>
+                            <h5 class="card-title">{{ item.title }}</h5>
+                            <p class="card-text text-muted small">{{ item.description|truncatechars:30 }}</p>
+                        </div>
+
+                        <div class="card-footer bg-transparent small text-muted">
+                            <div class="d-flex justify-content-between mb-3">
+                                <span><i class="bi bi-geo-alt me-1"></i>{{ item.city }}, {{ item.district }}</span>
+                                <span><i class="bi bi-calendar3 me-1"></i>{{ item.date|date:"M d, Y" }}</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-pencil me-1"></i>Edit
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash me-1"></i>Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-light border mb-0">You haven't submitted any items yet.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>

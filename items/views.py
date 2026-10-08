@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import ItemForm,ItemImageForm
 
-class FoundItemView(View):
+class FoundItemView(LoginRequiredMixin, View):
 
     def get(self, request):
         formitem = ItemForm()
@@ -29,11 +29,11 @@ class FoundItemView(View):
             return redirect('dashboard_page')
         return render(request, "core/dashboard.html", {"submit_found_form": formitem, "image_form": formimage})
 
-class LostItemView(View):
+class LostItemView(LoginRequiredMixin, View):
     def get(self, request):
         formitem = ItemForm()
         formimage = ItemImageForm()
-        return render(request, "core/dashboard.html", {"submit_found_form": formitem, "image_form": formimage})
+        return render(request, "core/dashboard.html", {"report_lost_form": formitem, "image_form": formimage})
 
     def post(self, request):
         formitem = ItemForm(request.POST)
