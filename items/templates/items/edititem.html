@@ -1,0 +1,7 @@
+{% load crispy_forms_tags %}
+<form method="POST" action="{% url 'edit_item_page' item.id %}" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ edit_item_form|crispy }}
+    {{ image_form|crispy }}
+    <button type="submit" class="btn btn-success fw-semibold w-100 mt-3">Save</button>
+</form>

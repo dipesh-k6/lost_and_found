@@ -12,6 +12,10 @@
 {% elif report_lost_form %}
     {% include "items/reportlostitem.html" %}
 
+<!-- edit item form -->
+{% elif edit_item_form %}
+  {% include "items/edititem.html" %}
+
 <!-- user section -->
 {% elif user_verified %}
     {% include "core/userpage.html" %}
