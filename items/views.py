@@ -131,6 +131,7 @@ class EditItem(LoginRequiredMixin, View):
                 return redirect("dashboard_page")
 
         # editing lost items
+        # save method and "signal"
         else:
             formitem = ItemForm(request.POST, instance=item)
             formimage = ItemImageForm()
@@ -140,10 +141,13 @@ class EditItem(LoginRequiredMixin, View):
                 item_data.user = request.user
 
                 if "image" in request.FILES:
-                    image = ItemImage.objects.get(item=item_id)
-                    formimage = ItemImageForm(
-                        request.POST, request.FILES, instance=image
-                    )
+                    try:
+                        image = ItemImage.objects.get(item=item_id)
+                        formimage = ItemImageForm(
+                            request.POST, request.FILES, instance=image
+                        )
+                    except:
+                        formimage = ItemImageForm(request.POST, request.FILES)
 
                     if formimage.is_valid():
                         image_data = formimage.save(commit=False)
