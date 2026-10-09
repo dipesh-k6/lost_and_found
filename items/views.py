@@ -154,15 +154,33 @@ class EditItem(LoginRequiredMixin, View):
                         return render(
                             request,
                             "core/dashboard.html",
-                            {"edit_item_form": formitem, "image_form": formimage, "item": item},
+                            {
+                                "edit_item_form": formitem,
+                                "image_form": formimage,
+                                "item": item,
+                            },
                         )
                 else:
                     item_data.save()
 
                 return redirect("dashboard_page")
-            
-        return render(request, "core/dashboard.html", {"edit_item_form": formitem, "image_form": formimage, "item": item})
+
+        return render(
+            request,
+            "core/dashboard.html",
+            {"edit_item_form": formitem, "image_form": formimage, "item": item},
+        )
 
 
 class DeleteItem(LoginRequiredMixin, View):
-    pass
+    """logic to handle deleting items"""
+
+    def get(self, request, item_id):
+        verify_user = request.user
+        item = Item.objects.get(id=item_id)
+
+        if item.user.id == verify_user.id:
+            item.delete()
+            # return redirect("user_page")
+
+        return redirect("dashboard_page")
