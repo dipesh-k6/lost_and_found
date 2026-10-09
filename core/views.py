@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from items.models import Item
+from .auth import user_only
 
 def dashboard(request):
     found_items = Item.objects.filter(type="found", status="active").prefetch_related("images").order_by("-date")
@@ -9,6 +10,7 @@ def dashboard(request):
 
     return render(request, 'core/dashboard.html', {"found_items":found_items, "lost_items":lost_items})
 
+@user_only
 @login_required
 def user_page(request, username, userid):
     verify_username = request.user.username
