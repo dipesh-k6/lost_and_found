@@ -5,4 +5,4 @@ class ItemsConfig(AppConfig):
     name = 'items'
 
     def ready(self):
-        from .signals import delete_image
+        from .signals import delete_image, edit_image
